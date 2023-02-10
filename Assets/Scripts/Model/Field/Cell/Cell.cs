@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cell
 {
-    private Chip CurrentChip;
+    public Chip CurrentChip {get; private set;}
     public Cell(int value)
     {
         CurrentChip = (Chip)value;

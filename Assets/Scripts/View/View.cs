@@ -4,4 +4,10 @@ using UnityEngine;
 
 public class View
 {
+    public FieldView FieldView{get; private set;}
+    
+    public void Init()
+    {
+        FieldView = new FieldView();
+    }
 }

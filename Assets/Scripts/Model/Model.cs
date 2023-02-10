@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Model
 {
-    private Field Field = new Field();
-    private LevelsManager Levels = new LevelsManager();
-    public void InitModel()
+    public Field Field {get; private set;}
+    public LevelsManager LevelsManager {get; private set;}
+    public void Init()
     {
-        Levels.InitLevels();
-        //Field.InitField();
+        Field = new Field();
+        LevelsManager = new LevelsManager();
+        InitModel();
+    }
+    private void InitModel()
+    {
+        LevelsManager.InitLevels();
+        Field.InitField();
     }
 }

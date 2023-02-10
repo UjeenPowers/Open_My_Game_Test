@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class LevelsJson
@@ -8,7 +9,8 @@ public class LevelsJson
     public List<FieldJson> Fields = new List<FieldJson>();
     static public LevelsJson ReadJson(string jsonString)
     {
-        LevelsJson Levels = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonString) as LevelsJson;
-        return Levels;
+        LevelsJson levels = JsonConvert.DeserializeObject<LevelsJson>(jsonString);
+        //LevelsJson Levels = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonString) as LevelsJson;
+        return levels;
     }
 }
