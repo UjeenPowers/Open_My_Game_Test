@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: atlas_fire
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 4e0a4aaa2f53fe04aa9b3d67a8771f83, type: 3}
+    - {fileID: 102900000, guid: 3d72f7bdfad4b854084926a001ddbbe1, type: 3}
+    totalSpriteSurfaceArea: 4950000
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 4b8e0e2022fdb55469f6bf3b68db380c, type: 3}
+  - {fileID: 21300000, guid: e6e742c07a93c3b4886b640644585f3d, type: 3}
+  - {fileID: 21300000, guid: 1f4da111cbba2c445a8602fedb0ecb87, type: 3}
+  - {fileID: 21300000, guid: 037a4c11559cac2468743d153ebe6f8b, type: 3}
+  - {fileID: 21300000, guid: 379e4c11bc9f76345b3b8b6631ad334a, type: 3}
+  - {fileID: 21300000, guid: ee8a8821c0071744bbcc1e931b8601dd, type: 3}
+  - {fileID: 21300000, guid: 52f8b8212e5e12b4894d2c70d990a68c, type: 3}
+  - {fileID: 21300000, guid: bdb75c61b89a0dc49a11465e8ee7089a, type: 3}
+  - {fileID: 21300000, guid: 23e39f7287141ca4494a8550ed03c07e, type: 3}
+  - {fileID: 21300000, guid: 3a59b4827af7723448f82120360dc735, type: 3}
+  - {fileID: 21300000, guid: 468c84d2b168c9e48a3fb95a05189e0d, type: 3}
+  - {fileID: 21300000, guid: ac03a443e1405a441b30fb5c74424877, type: 3}
+  - {fileID: 21300000, guid: 256e5204f82779147a16480c55fc8faf, type: 3}
+  - {fileID: 21300000, guid: c3082304c7484324c9fcda5a363fb9f4, type: 3}
+  - {fileID: 21300000, guid: 1e9cd7841d1866f4495c31048babe76e, type: 3}
+  - {fileID: 21300000, guid: 6ab52926e7d4c8049b142eae63547b17, type: 3}
+  - {fileID: 21300000, guid: 104985365259cbb4da86dfc98735f8a0, type: 3}
+  - {fileID: 21300000, guid: 6a5f4767eca8f194cbd312be48ff49a7, type: 3}
+  - {fileID: 21300000, guid: 99666b7712e6d5b47be94beb7c11cb3d, type: 3}
+  - {fileID: 21300000, guid: d46d3fe7dd37505418065c06b35ed720, type: 3}
+  - {fileID: 21300000, guid: c9d1e4b86630f034ca3d11730eb0717f, type: 3}
+  - {fileID: 21300000, guid: b2aa56194bef2c14cb54eaf9296bd9e3, type: 3}
+  - {fileID: 21300000, guid: 34f85639c7328a845af2f03f60bc8a01, type: 3}
+  - {fileID: 21300000, guid: a19a4a4919418e749893ee23f9878a3d, type: 3}
+  - {fileID: 21300000, guid: de2889f90c7c567469a9642b2c44a40c, type: 3}
+  - {fileID: 21300000, guid: 0fe0d47ad4ae8864795be38093081a4b, type: 3}
+  - {fileID: 21300000, guid: 182a028ac0ae2a24b98a36fb0c8f24f6, type: 3}
+  - {fileID: 21300000, guid: 617c9f0ba954c0c47b03f69926c5347a, type: 3}
+  - {fileID: 21300000, guid: f39a68cb2cd02374984e6674be9d9300, type: 3}
+  - {fileID: 21300000, guid: 929dfb0cc3bc0264386753ae6d18c974, type: 3}
+  - {fileID: 21300000, guid: a41f3c4ccca77dd4db9a67bf5ab2c089, type: 3}
+  - {fileID: 21300000, guid: 39ba0e6cd8a8eb44c98e0ea20b3392e8, type: 3}
+  - {fileID: 21300000, guid: f279b17d7fc9eb14c8400ec7fc2bd882, type: 3}
+  - {fileID: 21300000, guid: cf719e7d0a95e6f43ab7441c0b315036, type: 3}
+  - {fileID: 21300000, guid: 8030a7bd411176c43a421a66b5159ed4, type: 3}
+  - {fileID: 21300000, guid: 370521bec4946d04ba5e984ec8d6acb2, type: 3}
+  - {fileID: 21300000, guid: 8726abee94ac26a4b837562a51ad2ff1, type: 3}
+  - {fileID: 21300000, guid: fca1625fbadaae740b44a459d1fc707c, type: 3}
+  - {fileID: 21300000, guid: ffcfa7df0b185bf428bd2c720e002341, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - anim_fire_idle_8
+  - anim_fire_idle_12
+  - anim_fire_destroy_10
+  - anim_fire_idle_9
+  - anim_fire_destroy_7
+  - anim_fire_idle_13
+  - anim_fire_idle_4
+  - anim_fire_destroy_0
+  - anim_fire_destroy_9
+  - anim_fire_idle_15
+  - anim_fire_idle_5
+  - anim_fire_idle_18
+  - anim_fire_idle_0
+  - anim_fire_idle_10
+  - anim_fire_idle_6
+  - anim_fire_destroy_14
+  - anim_fire_idle_21
+  - anim_fire_idle_14
+  - anim_fire_destroy_16
+  - anim_fire_idle_3
+  - anim_fire_idle_19
+  - anim_fire_destroy_12
+  - anim_fire_idle_2
+  - anim_fire_destroy_8
+  - anim_fire_destroy_5
+  - anim_fire_destroy_3
+  - anim_fire_destroy_13
+  - anim_fire_idle_17
+  - anim_fire_idle_16
+  - anim_fire_destroy_4
+  - anim_fire_destroy_15
+  - anim_fire_idle_11
+  - anim_fire_destroy_1
+  - anim_fire_idle_1
+  - anim_fire_idle_7
+  - anim_fire_destroy_2
+  - anim_fire_destroy_6
+  - anim_fire_destroy_11
+  - anim_fire_idle_20
+  m_RenderDataMap: {}
+  m_Tag: atlas_fire
+  m_IsVariant: 0
