@@ -21,4 +21,11 @@ public class LevelsManager
     {
         return Levels[CurrentLevel];
     }
+
+    public Level GetNextLevel()
+    {  
+        CurrentLevel++;
+        if (CurrentLevel == Levels.Count) CurrentLevel = 0;
+        return GetCurrentLevel();
+    }
 }

@@ -16,8 +16,4 @@ public class Level
             }
         }
     }
-    public void DeserializeLevel()
-    {
-
-    }
 }

@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
 
         Model = new Model();
         View = new View();
+        Controller = new Controller();
 
         Init();
     }
@@ -24,5 +25,6 @@ public class Main : MonoBehaviour
     {
         View.Init();
         Model.Init();
+        Controller.Init();
     }
 }

@@ -34,4 +34,10 @@ public class CellView
                 break;
         }
     }
+
+    public void ClearCell()
+    {
+        CellTransform = null;
+        GameObject.Destroy(CellGO);
+    }
 }

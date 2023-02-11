@@ -7,13 +7,21 @@ public class Field
     private Cell[,] Cells;
     public void InitField()
     {
-        OpenLevel();
+        OpenLevel(Main.Instance.Model.LevelsManager.GetCurrentLevel());
     }
-    private void OpenLevel()
+    private void OpenLevel(Level level)
     {
-        Level level = Main.Instance.Model.LevelsManager.GetCurrentLevel();
         Cells = level.Cells.Clone() as Cell[,];
         Main.Instance.View.FieldView.DrawField(Cells);
+    } 
+    public void StartNextLevel()
+    {
+        ClearField();
+        OpenLevel(Main.Instance.Model.LevelsManager.GetNextLevel());
+    } 
+    private void ClearField()
+    {
+        Cells = null;
+        Main.Instance.View.FieldView.ClearField();
     }
-    
 }
