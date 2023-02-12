@@ -18,7 +18,28 @@ public class Field
     {
         ClearField();
         OpenLevel(Main.Instance.Model.LevelsManager.GetNextLevel());
-    } 
+    }
+    public void Swipe(Vector2Int coordinates, Vector2 swipeDirection)
+    {
+        Vector2Int finalSwipe;
+        if (Mathf.Abs(swipeDirection.x) > Mathf.Abs(swipeDirection.y))
+        {
+            finalSwipe = new Vector2Int(0 , (int)(swipeDirection.x/Mathf.Abs(swipeDirection.x)));
+        }
+        else{
+            finalSwipe = new Vector2Int((int)(-swipeDirection.y/Mathf.Abs(swipeDirection.y)) , 0 );
+        }
+
+        Vector2Int swappedCellCoorinates = coordinates+finalSwipe; //TODO check for possible air swaps, check for outoffield swaps
+        Cell swappedCell = Cells[swappedCellCoorinates.x,swappedCellCoorinates.y];
+        if (swappedCell.CurrentChip == Chip.None) Debug.Log("Swap With Air");
+        else
+        {
+            Cells[swappedCellCoorinates.x,swappedCellCoorinates.y] = Cells[coordinates.x,coordinates.y];
+            Cells[coordinates.x,coordinates.y] = swappedCell;
+            Main.Instance.View.FieldView.DrawField(Cells);
+        }
+    }
     private void ClearField()
     {
         Cells = null;

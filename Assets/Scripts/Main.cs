@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class Main : MonoBehaviour
     public Model Model{get; private set;}
     public View View{get; private set;}
     public Controller Controller{get; private set;}
+    //private Raycaster Raycaster;
+    public Action MainUpdate;
     void Start()
     {
         Instance = this;
@@ -17,6 +20,7 @@ public class Main : MonoBehaviour
         Model = new Model();
         View = new View();
         Controller = new Controller();
+        //Raycaster = new Raycaster();
 
         Init();
     }
@@ -26,5 +30,11 @@ public class Main : MonoBehaviour
         View.Init();
         Model.Init();
         Controller.Init();
+    }
+
+    void Update()
+    {
+        MainUpdate?.Invoke();
+        //Raycaster.Update();
     }
 }

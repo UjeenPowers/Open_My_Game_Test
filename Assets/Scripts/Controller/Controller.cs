@@ -6,7 +6,7 @@ public class Controller
 {
     public void Init()
     {
-        GameObject.Find("NextLevelButton").GetComponent<Button>().OnButtonClick += NextLevel;
+        GameObject.Find("NextLevelButton").GetComponent<UIButton>().OnButtonClick += NextLevel;
     }
     private void NextLevel()
     {

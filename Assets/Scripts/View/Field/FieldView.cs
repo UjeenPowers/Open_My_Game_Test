@@ -15,6 +15,7 @@ public class FieldView
             for (int j = 0; j<cols;j++)
             {
                 var cell = new CellView();
+                cell.InitCellView(new Vector2Int(i,j));
                 cell.DrawCell(new Vector2(i,j),cells[i,j].CurrentChip,cells.GetLength(0),cells.GetLength(1));
                 Cells[i,j] = cell;
             }
