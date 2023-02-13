@@ -7,4 +7,6 @@ public class Settings : ScriptableObject
 {
     public GameObject CellPrefab;
     public float CellSpacing;
+    public float CellSize;
+    public float FieldSize;
 }

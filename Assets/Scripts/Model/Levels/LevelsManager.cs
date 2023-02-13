@@ -5,27 +5,30 @@ using UnityEngine;
 
 public class LevelsManager
 {
-    private List<Level> Levels;
+    private LevelsJson Levels;
     private int CurrentLevel = 0;
     public void InitLevels()
     {
-        Levels = new List<Level>();
-        LevelsJson levels = LevelsJson.ReadJson(File.ReadAllText(Application.persistentDataPath + "/" + "Levels.json"));
-        foreach(var item in levels.Fields)
-        {
-            Levels.Add(new Level(item));
-        }
+        Levels = LevelsJson.ReadJson(File.ReadAllText(Application.persistentDataPath + "/" + "Levels.json"));
+        // Levels = new List<Level>();
+        // LevelsJson levels = LevelsJson.ReadJson(File.ReadAllText(Application.persistentDataPath + "/" + "Levels.json"));
+        // foreach(var item in levels.Fields)
+        // {
+        //     Levels.Add(new Level(item));
+        // }
     }
 
-    public Level GetCurrentLevel()
+    public FieldJson GetCurrentLevel()
     {
-        return Levels[CurrentLevel];
+        //LevelsJson levels = LevelsJson.ReadJson(File.ReadAllText(Application.persistentDataPath + "/" + "Levels.json"));
+        return Levels.Fields[CurrentLevel];
     }
 
-    public Level GetNextLevel()
+    public FieldJson GetNextLevel()
     {  
         CurrentLevel++;
-        if (CurrentLevel == Levels.Count) CurrentLevel = 0;
+        //LevelsJson levels = LevelsJson.ReadJson(File.ReadAllText(Application.persistentDataPath + "/" + "Levels.json"));
+        if (CurrentLevel == Levels.Fields.Count) CurrentLevel = 0;
         return GetCurrentLevel();
     }
 }

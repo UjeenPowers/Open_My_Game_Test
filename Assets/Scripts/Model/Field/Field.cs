@@ -4,45 +4,166 @@ using UnityEngine;
 
 public class Field
 {
+    public Vector2Int FieldDimension {get; private set;}
     private Cell[,] Cells;
     public void InitField()
     {
         OpenLevel(Main.Instance.Model.LevelsManager.GetCurrentLevel());
     }
-    private void OpenLevel(Level level)
+    private void OpenLevel(FieldJson json)
     {
-        Cells = level.Cells.Clone() as Cell[,];
-        Main.Instance.View.FieldView.DrawField(Cells);
-    } 
-    public void StartNextLevel()
+        Cells = new Cell[json.Rows.Count,json.Rows[0].Column.Count];
+        FieldDimension = new Vector2Int(Cells.GetLength(0),Cells.GetLength(1));
+        for (int i = 0; i<Cells.GetLength(0); i++)
+        {
+            for (int j = 0; j<Cells.GetLength(1); j++)
+            {
+                Cell cell = new Cell();
+                cell.Init(json.Rows[i].Column[j],new Vector2Int(i,j));
+                Cells[i,j] = cell;
+            }
+        }
+    }
+    public void GoToNextLevel()
     {
         ClearField();
         OpenLevel(Main.Instance.Model.LevelsManager.GetNextLevel());
     }
-    public void Swipe(Vector2Int coordinates, Vector2 swipeDirection)
+    public void Swipe(Vector2Int target, Vector2 direction)
     {
         Vector2Int finalSwipe;
-        if (Mathf.Abs(swipeDirection.x) > Mathf.Abs(swipeDirection.y))
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
-            finalSwipe = new Vector2Int(0 , (int)(swipeDirection.x/Mathf.Abs(swipeDirection.x)));
+            finalSwipe = new Vector2Int(0 , (int)Mathf.Sign(direction.x));
         }
-        else{
-            finalSwipe = new Vector2Int((int)(-swipeDirection.y/Mathf.Abs(swipeDirection.y)) , 0 );
-        }
-
-        Vector2Int swappedCellCoorinates = coordinates+finalSwipe; //TODO check for possible air swaps, check for outoffield swaps
-        Cell swappedCell = Cells[swappedCellCoorinates.x,swappedCellCoorinates.y];
-        if (swappedCell.CurrentChip == Chip.None) Debug.Log("Swap With Air");
         else
         {
-            Cells[swappedCellCoorinates.x,swappedCellCoorinates.y] = Cells[coordinates.x,coordinates.y];
-            Cells[coordinates.x,coordinates.y] = swappedCell;
-            Main.Instance.View.FieldView.DrawField(Cells);
+            finalSwipe = new Vector2Int((int)(-Mathf.Sign(direction.y)),0);
         }
+
+        Vector2Int swap_target = target+finalSwipe;
+
+        if (swap_target.x < Cells.GetLength(0) && swap_target.y < Cells.GetLength(1) && swap_target.x >= 0 && swap_target.y >= 0)
+        {
+            if (!(finalSwipe == new Vector2(-1,0) && Cells[swap_target.x,swap_target.y].CurrentChip == Chip.None))
+            {
+                //TODO anim
+                Main.Instance.Controller.IncreaseActions(3);
+                Cells[target.x,target.y].Swipe(swap_target);
+                Cells[swap_target.x,swap_target.y].Swipe(target);
+                (Cells[swap_target.x,swap_target.y], Cells[target.x,target.y]) = (Cells[target.x,target.y], Cells[swap_target.x,swap_target.y]);
+                Main.Instance.Controller.DecreaseActions(1);
+            }
+        }
+    }
+    public void Fall()
+    {
+        for (int j = 0; j<Cells.GetLength(1); j++)
+        {
+            int placeToFall = 0;
+            for (int i = Cells.GetLength(0)-1; i>=0; i--)
+            {
+                if (Cells[i,j].CurrentChip == Chip.None) 
+                {
+                    placeToFall++;
+                }
+                else
+                {
+                    if (placeToFall > 0)
+                    {
+                        Cells[i,j].Fall(new Vector2Int(i+placeToFall,j));
+                        (Cells[i,j], Cells[i+placeToFall,j]) = (Cells[i+placeToFall,j], Cells[i,j]);
+                    }
+                }
+            }
+        }
+        FindCombos();
+    }
+    private void FindCombos()
+    {
+        bool needDeletion = false;
+        if (Cells.GetLength(1) > 2)
+        {
+            for (int i = 0; i<Cells.GetLength(0); i++)
+            {
+                int amountInRow = 1;
+                Chip previousChip = Chip.None;
+                for (int j = 0; j<Cells.GetLength(1); j++)
+                {
+                    if (Cells[i,j].CurrentChip != Chip.None)
+                    {
+                        if (Cells[i,j].CurrentChip != previousChip) amountInRow = 1;
+                        else
+                        {
+                            if (Cells[i,j].CurrentChip == previousChip) amountInRow++;
+                            if (amountInRow == 3) for (int k=0; k<3; k++) {Cells[i,j-k].MarkForDeletion(); needDeletion = true;}
+                            if (amountInRow > 3) Cells[i,j].MarkForDeletion();
+                        }
+                    }
+                    previousChip = Cells[i,j].CurrentChip;
+                }
+            }
+        }
+
+        if (Cells.GetLength(0) > 2)
+        {
+            for (int j = 0; j<Cells.GetLength(1); j++)
+            {
+                int amountInRow = 1;
+                Chip previousChip = Chip.None;
+                for (int i = 0; i<Cells.GetLength(0); i++)
+                {
+                    if (Cells[i,j].CurrentChip != Chip.None)
+                    {
+                        if (Cells[i,j].CurrentChip != previousChip) amountInRow = 1;
+                        else
+                        {
+                            if (Cells[i,j].CurrentChip == previousChip) amountInRow++;
+                            if (amountInRow == 3) for (int k=0; k<3; k++) {Cells[i-k,j].MarkForDeletion(); needDeletion = true;}
+                            if (amountInRow > 3) Cells[i,j].MarkForDeletion();
+                        }
+                    }
+                    previousChip = Cells[i,j].CurrentChip;
+                }
+            }
+        }
+
+        if (needDeletion) DeleteCombos();
+    }
+    private void DeleteCombos()
+    {
+        for (int i = 0; i<Cells.GetLength(0); i++)
+        {
+            for (int j = 0; j<Cells.GetLength(1); j++)
+            {
+                if (Cells[i,j].MarkedForDeletion) Cells[i,j].Delete();
+            }
+        }
+
+
+        bool fieldClear = true;
+        for (int i = 0; i<Cells.GetLength(0); i++)
+        {
+            for (int j = 0; j<Cells.GetLength(1); j++)
+            {
+                if (Cells[i,j].CurrentChip != Chip.None) fieldClear = false;
+            }
+        }
+
+        //TODO add await for anims
+        if (fieldClear) GoToNextLevel();
+        else Fall();
     }
     private void ClearField()
     {
+        for (int i = 0; i<Cells.GetLength(0); i++)
+        {
+            for (int j = 0; j<Cells.GetLength(1); j++)
+            {
+                Cells[i,j].Clear();
+            }
+        }
+
         Cells = null;
-        Main.Instance.View.FieldView.ClearField();
     }
 }

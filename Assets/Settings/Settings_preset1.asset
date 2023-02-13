@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 3091620833304220486, guid: 1a7d01f04cd6e5c42a2302bca78ea95a, type: 3}
   CellSpacing: 10
+  CellSize: 200
+  FieldSize: 1000
