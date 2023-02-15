@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [System.Serializable]
@@ -10,7 +11,6 @@ public class Main : MonoBehaviour
     public Settings Settings;
     public Model Model{get; private set;}
     public Controller Controller{get; private set;}
-    //private Raycaster Raycaster;
     public Action MainUpdate;
     void Start()
     {
@@ -18,20 +18,14 @@ public class Main : MonoBehaviour
 
         Model = new Model();
         Controller = new Controller();
-        //Raycaster = new Raycaster();
 
         Init();
+        DOTween.Init();
     }
 
     private void Init()
     {
         Model.Init();
         Controller.Init();
-    }
-
-    void Update()
-    {
-        MainUpdate?.Invoke();
-        //Raycaster.Update();
     }
 }

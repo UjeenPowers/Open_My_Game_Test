@@ -31,6 +31,7 @@ public class Field
     }
     public void Swipe(Vector2Int target, Vector2 direction)
     {
+        Main.Instance.Controller.IncreaseActions(1);
         Vector2Int finalSwipe;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
@@ -48,13 +49,12 @@ public class Field
             if (!(finalSwipe == new Vector2(-1,0) && Cells[swap_target.x,swap_target.y].CurrentChip == Chip.None))
             {
                 //TODO anim
-                Main.Instance.Controller.IncreaseActions(3);
                 Cells[target.x,target.y].Swipe(swap_target);
                 Cells[swap_target.x,swap_target.y].Swipe(target);
                 (Cells[swap_target.x,swap_target.y], Cells[target.x,target.y]) = (Cells[target.x,target.y], Cells[swap_target.x,swap_target.y]);
-                Main.Instance.Controller.DecreaseActions(1);
             }
         }
+        Main.Instance.Controller.DecreaseActions(1);
     }
     public void Fall()
     {
@@ -77,11 +77,11 @@ public class Field
                 }
             }
         }
-        FindCombos();
     }
-    private void FindCombos()
+    public void FindCombos()
     {
-        bool needDeletion = false;
+        List<Cell> cellsForDeletion = new List<Cell>();
+
         if (Cells.GetLength(1) > 2)
         {
             for (int i = 0; i<Cells.GetLength(0); i++)
@@ -96,7 +96,7 @@ public class Field
                         else
                         {
                             if (Cells[i,j].CurrentChip == previousChip) amountInRow++;
-                            if (amountInRow == 3) for (int k=0; k<3; k++) {Cells[i,j-k].MarkForDeletion(); needDeletion = true;}
+                            if (amountInRow == 3) for (int k=0; k<3; k++) Cells[i,j-k].MarkForDeletion();
                             if (amountInRow > 3) Cells[i,j].MarkForDeletion();
                         }
                     }
@@ -104,7 +104,6 @@ public class Field
                 }
             }
         }
-
         if (Cells.GetLength(0) > 2)
         {
             for (int j = 0; j<Cells.GetLength(1); j++)
@@ -119,7 +118,7 @@ public class Field
                         else
                         {
                             if (Cells[i,j].CurrentChip == previousChip) amountInRow++;
-                            if (amountInRow == 3) for (int k=0; k<3; k++) {Cells[i-k,j].MarkForDeletion(); needDeletion = true;}
+                            if (amountInRow == 3) for (int k=0; k<3; k++) Cells[i-k,j].MarkForDeletion();
                             if (amountInRow > 3) Cells[i,j].MarkForDeletion();
                         }
                     }
@@ -128,7 +127,7 @@ public class Field
             }
         }
 
-        if (needDeletion) DeleteCombos();
+        DeleteCombos();
     }
     private void DeleteCombos()
     {
@@ -139,8 +138,10 @@ public class Field
                 if (Cells[i,j].MarkedForDeletion) Cells[i,j].Delete();
             }
         }
+    }
 
-
+    public void CheckForCompletedField()
+    {
         bool fieldClear = true;
         for (int i = 0; i<Cells.GetLength(0); i++)
         {
@@ -149,10 +150,11 @@ public class Field
                 if (Cells[i,j].CurrentChip != Chip.None) fieldClear = false;
             }
         }
-
-        //TODO add await for anims
-        if (fieldClear) GoToNextLevel();
-        else Fall();
+        if (fieldClear) 
+        {
+            Main.Instance.Controller.CompletedLevel();
+            GoToNextLevel();
+        }
     }
     private void ClearField()
     {

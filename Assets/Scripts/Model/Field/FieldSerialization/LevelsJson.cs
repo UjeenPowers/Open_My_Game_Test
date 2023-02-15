@@ -10,7 +10,6 @@ public class LevelsJson
     static public LevelsJson ReadJson(string jsonString)
     {
         LevelsJson levels = JsonConvert.DeserializeObject<LevelsJson>(jsonString);
-        //LevelsJson Levels = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonString) as LevelsJson;
         return levels;
     }
 }

@@ -20,31 +20,41 @@ public class Cell
     }
     public void OnSwipeDetection(Vector2 vector)
     {
-        Main.Instance.Model.Field.Swipe(CellCoordinates, vector);
+        if (Main.Instance.Controller.NoActions()) Main.Instance.Model.Field.Swipe(CellCoordinates, vector);
     }
     public void Swipe(Vector2Int newPos)
     {
+        Main.Instance.Controller.IncreaseActions(1);
         CellCoordinates = newPos;
-        CellView.OnSwipeAnimEnd += OnSwipeAnimEnd;
+        CellView.OnAnimEnd += OnAnimEnd;
         CellView.MoveTo(CellCoordinates);
     }
-    private void OnSwipeAnimEnd()
+    private void OnAnimEnd()
     {
+        CellView.OnAnimEnd -= OnAnimEnd;
         Main.Instance.Controller.DecreaseActions(1);
     }
     public void Fall(Vector2Int newPos)
     {
+        Main.Instance.Controller.IncreaseActions(1);
+
+        int fallCells = newPos.x - CellCoordinates.x;
         CellCoordinates = newPos;
-        CellView.FallTo(CellCoordinates);
+        CellView.OnAnimEnd += OnAnimEnd;
+        CellView.FallTo(CellCoordinates, fallCells);
     }
     public void MarkForDeletion()
     {
-        MarkedForDeletion = true;
+        if (!MarkedForDeletion)
+        {
+            Main.Instance.Controller.IncreaseActions(1);
+            MarkedForDeletion = true;
+        }
     }
     public void Delete()
     {
-        CellView.Delete();
         CurrentChip = Chip.None;
+        CellView.Delete();
         //TODO clear
     }
     public void Clear()

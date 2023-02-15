@@ -9,4 +9,6 @@ public class Settings : ScriptableObject
     public float CellSpacing;
     public float CellSize;
     public float FieldSize;
+    public float SwapTime;
+    public float FallTime;
 }

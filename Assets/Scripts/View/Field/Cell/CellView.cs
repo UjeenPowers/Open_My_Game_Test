@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class CellView
 {
@@ -11,15 +12,18 @@ public class CellView
     private static float CellSpacing = Main.Instance.Settings.CellSpacing;
     private static float CellSize = Main.Instance.Settings.CellSize;
     private static float FieldSize = Main.Instance.Settings.FieldSize;
+    private static float SwapTime = Main.Instance.Settings.SwapTime;
+    private static float FallTime = Main.Instance.Settings.FallTime;
     private static GameObject Anchor = GameObject.Find("CellsAnchor");
     private Vector2Int FieldDimension;
     private GameObject GameObject;
     private Transform Transform;
+    private CellAnim Anim;
     private Canvas Canvas;
     private UICell UICell;
     private float LocalScale;
     public Action<Vector2> OnSwipe;
-    public Action OnSwipeAnimEnd;
+    public Action OnAnimEnd;
     public void InitCellView(Action<Vector2> swipeAction)
     {
         //TODO fabric for views
@@ -27,6 +31,7 @@ public class CellView
         GameObject = GameObject.Instantiate(Prefab, Anchor.transform);
         Transform = GameObject.transform;
         Canvas = Transform.Find("View").GetComponent<Canvas>();
+        Anim = Canvas.GetComponent<CellAnim>();
         UICell = Transform.Find("Raycast").GetComponent<UICell>();
         OnSwipe = swipeAction;
         UICell.Swipe += OnSwipe;
@@ -37,40 +42,32 @@ public class CellView
         Transform.localPosition = CalculateLocalPosition(pos);
         Transform.localScale = new Vector2(LocalScale,LocalScale);
         Canvas.sortingOrder = CalculateSortingOrder(pos);
-
-        switch (chipType)
-        {
-            case Chip.None:
-                GameObject.SetActive(false);
-                break;
-            case Chip.Fire:
-                Transform.Find("View").Find("Fire").gameObject.SetActive(true);
-                break;
-            case Chip.Water:
-                Transform.Find("View").Find("Water").gameObject.SetActive(true);
-                break;
-        }
+        Anim.SetChip(chipType);
     }
     public void MoveTo(Vector2Int newPos)
     {
         Vector2 endPosition = CalculateLocalPosition(newPos);
-        //TODO implement tweener for swipe
-        Transform.localPosition = endPosition;
+        Tween moveTween = Transform.DOLocalMove(endPosition, SwapTime);
+        moveTween.OnComplete(() => OnAnimEnd?.Invoke());
         Canvas.sortingOrder = CalculateSortingOrder(newPos);
-        OnSwipeAnimEnd?.Invoke();
     }
 
-    public void FallTo(Vector2Int newPos)
+    public void FallTo(Vector2Int newPos, float fallCells)
     {
         Vector2 endPosition = CalculateLocalPosition(newPos);
-        //TODO implement tweener for fall
-        Transform.localPosition = endPosition;
+        Tween moveTween = Transform.DOLocalMove(endPosition, FallTime*fallCells);
+        moveTween.OnComplete(() => OnAnimEnd?.Invoke());
         Canvas.sortingOrder = CalculateSortingOrder(newPos);
     }
     public void Delete()
     {
         //TODO anim
-        GameObject.SetActive(false);
+        Anim.PlayDestroyAnim();
+        Anim.AnimFinished += AnimFinished;
+    }
+    private void AnimFinished()
+    {
+        Main.Instance.Controller.DecreaseActions(1);
     }
 
     private Vector2 CalculateLocalPosition(Vector2Int pos)
