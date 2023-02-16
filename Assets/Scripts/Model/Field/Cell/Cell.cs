@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Cell
 {
+    private const float MinSwipeDistance = 50f;
     public Chip CurrentChip {get; private set;}
     private Vector2Int CellCoordinates;
     private CellView CellView;
@@ -20,7 +21,10 @@ public class Cell
     }
     public void OnSwipeDetection(Vector2 vector)
     {
-        if (Main.Instance.Controller.NoActions()) Main.Instance.Model.Field.Swipe(CellCoordinates, vector);
+        if (vector.magnitude > MinSwipeDistance)
+        {
+            if (Main.Instance.Controller.NoActions()) Main.Instance.Model.Field.Swipe(CellCoordinates, vector);
+        }
     }
     public void Swipe(Vector2Int newPos)
     {
