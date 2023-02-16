@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpawnManagerScriptableObject", order = 1)]
 public class Settings : ScriptableObject
 {
-    public GameObject CellPrefab;
-    public float CellSpacing;
+    public int BaloonsMinDelay;
+    public int BaloonsMaxDelay;
+    public int MaxBaloonsOnField;
     public float CellSize;
     public float FieldSize;
     public float SwapTime;

@@ -8,8 +8,7 @@ using DG.Tweening;
 
 public class CellView
 {
-    private static GameObject Prefab = Main.Instance.Settings.CellPrefab;
-    private static float CellSpacing = Main.Instance.Settings.CellSpacing;
+    private const string PrefabPath = "Prefabs/Cell";
     private static float CellSize = Main.Instance.Settings.CellSize;
     private static float FieldSize = Main.Instance.Settings.FieldSize;
     private static float SwapTime = Main.Instance.Settings.SwapTime;
@@ -28,7 +27,7 @@ public class CellView
     {
         //TODO fabric for views
         FieldDimension = Main.Instance.Model.Field.FieldDimension;
-        GameObject = GameObject.Instantiate(Prefab, Anchor.transform);
+        GameObject = GameObject.Instantiate(Resources.Load(PrefabPath) as GameObject, Anchor.transform);
         Transform = GameObject.transform;
         Canvas = Transform.Find("View").GetComponent<Canvas>();
         Anim = Canvas.GetComponent<CellAnim>();

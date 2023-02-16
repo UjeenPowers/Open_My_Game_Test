@@ -5,14 +5,11 @@ using UnityEngine;
 
 public class Controller
 {
-    private static int EnumLength = Enum.GetNames(typeof(FieldStage)).Length;
     private int ActionsAmount;
-    private FieldStage CurrentStage;
     public void Init()
     {
         GameObject.Find("NextLevelButton").GetComponent<UIButton>().OnButtonClick += NextLevel;
         ActionsAmount = 0;
-        CurrentStage = 0;
     }
     private void NextLevel()
     {
@@ -39,7 +36,6 @@ public class Controller
     }
     public void CompletedLevel()
     {
-        CurrentStage = 0;
         SetActions(0);
     }
     public bool NoActions()

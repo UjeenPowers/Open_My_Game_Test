@@ -11,7 +11,6 @@ public class Main : MonoBehaviour
     public Settings Settings;
     public Model Model{get; private set;}
     public Controller Controller{get; private set;}
-    public Action MainUpdate;
     void Start()
     {
         Instance = this;
@@ -27,5 +26,9 @@ public class Main : MonoBehaviour
     {
         Model.Init();
         Controller.Init();
+    }
+    void OnApplicationQuit()
+    {
+        Model.Clear();
     }
 }

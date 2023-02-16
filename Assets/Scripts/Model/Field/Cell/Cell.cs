@@ -55,11 +55,10 @@ public class Cell
     {
         CurrentChip = Chip.None;
         CellView.Delete();
-        //TODO clear
     }
     public void Clear()
     {
         CellView.ClearCell();
-        //TODO
+        //TODO proper clear
     }
 }

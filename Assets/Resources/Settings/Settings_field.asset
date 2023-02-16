@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d32ff271b3b5645b2905829cae59ef, type: 3}
   m_Name: Settings_field
   m_EditorClassIdentifier: 
-  CellPrefab: {fileID: 3091620833304220486, guid: 1a7d01f04cd6e5c42a2302bca78ea95a, type: 3}
-  CellSpacing: 10
+  BaloonsMinDelay: 5
+  BaloonsMaxDelay: 10
+  MaxBaloonsOnField: 3
   CellSize: 200
   FieldSize: 1000
   SwapTime: 0.25
