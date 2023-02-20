@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-using DG.Tweening;
+//using DG.Tweening;
 
 public class CellView
 {
@@ -46,16 +46,16 @@ public class CellView
     public void MoveTo(Vector2Int newPos)
     {
         Vector2 endPosition = CalculateLocalPosition(newPos);
-        Tween moveTween = Transform.DOLocalMove(endPosition, SwapTime);
-        moveTween.OnComplete(() => OnAnimEnd?.Invoke());
+        //Tween moveTween = Transform.DOLocalMove(endPosition, SwapTime);
+        //moveTween.OnComplete(() => OnAnimEnd?.Invoke());
         Canvas.sortingOrder = CalculateSortingOrder(newPos);
     }
 
     public void FallTo(Vector2Int newPos, float fallCells)
     {
         Vector2 endPosition = CalculateLocalPosition(newPos);
-        Tween moveTween = Transform.DOLocalMove(endPosition, FallTime*fallCells);
-        moveTween.OnComplete(() => OnAnimEnd?.Invoke());
+        //Tween moveTween = Transform.DOLocalMove(endPosition, FallTime*fallCells);
+        //moveTween.OnComplete(() => OnAnimEnd?.Invoke());
         Canvas.sortingOrder = CalculateSortingOrder(newPos);
     }
     public void Delete()

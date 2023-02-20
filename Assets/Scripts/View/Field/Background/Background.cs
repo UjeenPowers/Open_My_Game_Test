@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+//using DG.Tweening;
 
 public class Background
 {
@@ -13,7 +13,7 @@ public class Background
     private Transform Transform;
     private Stack<Baloon> InactiveBaloons;
     private System.Random Random;
-    private Tween Tween;
+    //private Tween Tween;
     public void Init()
     {
         GameObject = GameObject.Find("BG");
@@ -32,7 +32,7 @@ public class Background
     }
     private void SetupNextBaloon()
     {
-        Tween = DOVirtual.DelayedCall(Random.Next(BaloonsMinDelay, BaloonsMaxDelay),TryStartNewBaloon);
+        //Tween = DOVirtual.DelayedCall(Random.Next(BaloonsMinDelay, BaloonsMaxDelay),TryStartNewBaloon);
     }
     private void TryStartNewBaloon()
     {
@@ -45,7 +45,7 @@ public class Background
     }
     public void Clear()
     {
-        Tween.Kill();
+        //Tween.Kill();
         //Token.
     }
 }

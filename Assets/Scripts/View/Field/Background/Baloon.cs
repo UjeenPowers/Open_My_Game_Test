@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+//using DG.Tweening;
 
 public class Baloon
 {
@@ -53,16 +53,16 @@ public class Baloon
     private void StartMoving(float hSpeed, float vSpeed)
     {
         float flyTime = (MaxX*2f)/Mathf.Abs(hSpeed);
-        Transform.DOBlendableLocalMoveBy(new Vector3(MaxX*2f*Mathf.Sign(hSpeed),0,0),flyTime);
-        Sequence mySequence = DOTween.Sequence();
+        //Transform.DOBlendableLocalMoveBy(new Vector3(MaxX*2f*Mathf.Sign(hSpeed),0,0),flyTime);
+        //Sequence mySequence = DOTween.Sequence();
 
         int directionsSwaps = Rand.Next(2,5);
         for (int i = 0; i<directionsSwaps;i++)
         {
-            if (i % 2 == 1) mySequence.Append(Transform.DOBlendableLocalMoveBy(new Vector3(0,vSpeed,0),flyTime/directionsSwaps,true));
-            else mySequence.Append(Transform.DOBlendableLocalMoveBy(new Vector3(0,-vSpeed,0),flyTime/directionsSwaps,true));
+            //if (i % 2 == 1) mySequence.Append(Transform.DOBlendableLocalMoveBy(new Vector3(0,vSpeed,0),flyTime/directionsSwaps,true));
+            //else mySequence.Append(Transform.DOBlendableLocalMoveBy(new Vector3(0,-vSpeed,0),flyTime/directionsSwaps,true));
         }
-        mySequence.AppendCallback(EndPath);
+        //mySequence.AppendCallback(EndPath);
         //TODO change to custom Sinus-like transform.localPosition movement with Main.Update
     }
     private void EndPath()

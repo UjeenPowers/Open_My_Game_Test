@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
+// using DG.Tweening;
 using UnityEngine;
 
 [System.Serializable]
@@ -19,7 +19,7 @@ public class Main : MonoBehaviour
         Controller = new Controller();
 
         Init();
-        DOTween.Init();
+        //DOTween.Init();
     }
 
     private void Init()
