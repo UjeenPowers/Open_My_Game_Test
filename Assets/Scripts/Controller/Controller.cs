@@ -13,7 +13,7 @@ public class Controller
     }
     private void NextLevel()
     {
-        Main.Instance.Model.Field.GoToNextLevel();
+        //Main.Instance.Model.Field.GoToNextLevel();
     }
     public void IncreaseActions(int amount)
     {
@@ -30,9 +30,9 @@ public class Controller
     }
     private void ExecuteFieldActions()
     {
-        Main.Instance.Model.Field.Fall();
-        if (ActionsAmount == 0) Main.Instance.Model.Field.FindCombos();
-        if (ActionsAmount == 0) Main.Instance.Model.Field.CheckForCompletedField();
+        // Main.Instance.Model.Field.Fall();
+        // if (ActionsAmount == 0) Main.Instance.Model.Field.FindCombos();
+        // if (ActionsAmount == 0) Main.Instance.Model.Field.CheckForCompletedField();
     }
     public void CompletedLevel()
     {

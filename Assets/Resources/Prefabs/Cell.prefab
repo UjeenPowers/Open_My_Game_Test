@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3091620833304220485}
   - component: {fileID: 3091620833304220483}
+  - component: {fileID: 4795373304589000875}
   m_Layer: 5
   m_Name: Cell
   m_TagString: Untagged
@@ -46,6 +47,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3091620833304220486}
   m_CullTransparentMesh: 1
+--- !u!114 &4795373304589000875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091620833304220486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f92469fef311b54c86210f0b1162964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4836802536940350615
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +179,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4836802536940350615}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 26c88e2887d12de4b96e95e181a5d2e9, type: 2}
   m_CullingMode: 0
@@ -189,7 +202,6 @@ GameObject:
   - component: {fileID: 4051093646638660278}
   - component: {fileID: 2923481825095640313}
   - component: {fileID: 5777120100574457077}
-  - component: {fileID: 1194699297276491124}
   m_Layer: 5
   m_Name: Raycast
   m_TagString: Untagged
@@ -271,8 +283,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1194699297276491124}
-          m_TargetAssemblyTypeName: UICell, Assembly-CSharp
+        - m_Target: {fileID: 4795373304589000875}
+          m_TargetAssemblyTypeName: CellView, Assembly-CSharp
           m_MethodName: OnPointerDown
           m_Mode: 0
           m_Arguments:
@@ -287,8 +299,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1194699297276491124}
-          m_TargetAssemblyTypeName: UICell, Assembly-CSharp
+        - m_Target: {fileID: 4795373304589000875}
+          m_TargetAssemblyTypeName: CellView, Assembly-CSharp
           m_MethodName: OnPointerUp
           m_Mode: 0
           m_Arguments:
@@ -299,15 +311,3 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1194699297276491124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8160219555247691723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f067629b89351b42a3a1b64b638b8ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

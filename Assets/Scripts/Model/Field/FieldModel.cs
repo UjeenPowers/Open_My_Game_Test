@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class Field
+public class FieldModel
 {
+    private Cell.CellPool CellPool;
     public Vector2Int FieldDimension {get; private set;}
     private Cell[,] Cells;
-    public void InitField()
+    private LevelsManager LevelsManager;
+    public FieldModel(LevelsManager levelsManager, Cell.CellPool pool)
     {
-        OpenLevel(Main.Instance.Model.LevelsManager.GetCurrentLevel());
+        LevelsManager = levelsManager;
+        CellPool = pool;
+    }
+
+    public void Initialize()
+    {
+        OpenLevel(LevelsManager.GetNextLevel());
     }
     private void OpenLevel(FieldJson json)
     {
@@ -18,16 +27,19 @@ public class Field
         {
             for (int j = 0; j<Cells.GetLength(1); j++)
             {
-                Cell cell = new Cell();
+                var cell = CellPool.Spawn();
                 cell.Init(json.Rows[i].Column[j],new Vector2Int(i,j));
                 Cells[i,j] = cell;
+                // Cell cell = new Cell();
+                // cell.Init(json.Rows[i].Column[j],new Vector2Int(i,j));
+                // Cells[i,j] = cell;
             }
         }
     }
     public void GoToNextLevel()
     {
         ClearField();
-        OpenLevel(Main.Instance.Model.LevelsManager.GetNextLevel());
+        OpenLevel(LevelsManager.GetNextLevel());
     }
     public void Swipe(Vector2Int target, Vector2 direction)
     {

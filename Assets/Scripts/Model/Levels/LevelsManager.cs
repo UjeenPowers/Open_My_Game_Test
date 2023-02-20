@@ -8,10 +8,14 @@ public class LevelsManager
     private const string LevelsPath = "Levels/Levels";
     private LevelsJson Levels;
     private int CurrentLevel = 0;
-    public void InitLevels()
+    public LevelsManager()
     {
         Levels = LevelsJson.ReadJson(Resources.Load<TextAsset>(LevelsPath).ToString());
     }
+    // public void InitLevels()
+    // {
+    //     Levels = LevelsJson.ReadJson(Resources.Load<TextAsset>(LevelsPath).ToString());
+    // }
 
     public FieldJson GetCurrentLevel()
     {
